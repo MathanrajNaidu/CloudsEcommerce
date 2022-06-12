@@ -362,4 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-CloudsEcommerceClientApp/.angular/
+CloudsEcommerce/CloudsEcommerceClientApp/.angular/
+/CloudsEcommerceClientApp/.angular/cache/14.0.1
