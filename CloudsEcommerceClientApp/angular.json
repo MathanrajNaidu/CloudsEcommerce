@@ -3,13 +3,13 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "CloudsEcommerce": {
+    "CloudsEcommerceClientApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+        "style": "scss"
+      }
+    },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/clouds-ecommerce",
+            "outputPath": "dist/clouds-ecommerce-client-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -69,18 +70,21 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CloudsEcommerce:build:production"
+              "browserTarget": "CloudsEcommerceClientApp:build:production"
             },
             "development": {
-              "browserTarget": "CloudsEcommerce:build:development"
+              "browserTarget": "CloudsEcommerceClientApp:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "src/proxy.conf.js"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CloudsEcommerce:build"
+            "browserTarget": "CloudsEcommerceClientApp:build"
           }
         },
         "test": {
