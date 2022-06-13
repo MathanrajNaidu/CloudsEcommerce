@@ -11,21 +11,19 @@ namespace CloudsEcommerce.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        protected readonly IConfiguration _configuration;
+        protected readonly IProductService _productService;
         protected readonly IMapper _mapper;
 
-        public ProductsController(IConfiguration configuration, IMapper mapper)
+        public ProductsController(IProductService productService, IMapper mapper)
         {
-            _configuration = configuration;
+            _productService = productService;
             _mapper = mapper;
         }
 
         [HttpGet(Name = "GetProducts")]
         public IEnumerable<ProductDto> Get()
         {
-            var apiKey = _configuration["api-key"];
-            ProductService productService = new(apiKey);
-            return _mapper.Map<List<ProductDto>>(productService.GetProducts());
+            return _mapper.Map<List<ProductDto>>(_productService.GetProducts());
         }
     }
 }

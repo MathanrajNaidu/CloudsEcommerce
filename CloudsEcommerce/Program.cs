@@ -1,5 +1,6 @@
 using AutoMapper;
 using CloudsEcommerce;
+using Domain.Products;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,7 @@ var config = new MapperConfiguration(cfg =>
 var mapper = config.CreateMapper();
 
 builder.Services.AddSingleton(mapper);
+builder.Services.AddTransient<IProductService, ProductService>();
 
 var app = builder.Build();
 

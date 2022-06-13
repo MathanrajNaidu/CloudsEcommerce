@@ -4,23 +4,32 @@ using RestSharp.Authenticators;
 
 namespace Domain.Products
 {
-    public class ProductService
+    public class ProductService : IProductService
     {
-        protected readonly string _apiKey;
+        protected readonly IConfiguration _configuration;
 
-        public ProductService(string apiKey)
+        public ProductService(IConfiguration configuration)
         {
-            _apiKey = apiKey;
+            _configuration = configuration;
         }
+
 
         public List<Product> GetProducts()
         {
-            //var apiKey = "API-DS87LLR1SODY667";
             var client = new RestClient("http://alltheclouds.com.au/api");
             var request = new RestRequest("/Products", Method.Get);
-            request.AddHeader("api-key", _apiKey);
-            var response = client.Get<List<Product>>(request);
-            return response?? new List<Product>();
+            request.AddHeader("api-key", _configuration["api-key"]);
+            try
+            {
+                var response = client.Get<List<Product>>(request);
+                return response?.Select(x => { x.UnitPrice *= 1.2; return x; } )?.ToList() ?? new List<Product>();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Service not available");
+            }
+
+
         }
     }
 }

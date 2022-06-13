@@ -1,23 +1,15 @@
-﻿<h1 id="tableLabel">Weather forecast</h1>
+﻿<h1 id="tableLabel">Clouds Ecommerce</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p *ngIf="!products"><em>Loading...</em> 
 
-<p *ngIf="!products"><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationangular">https://aka.ms/jspsintegrationangular</a> for more details.</em></p>
-
-<table *ngIf="products">
-    <thead>
-        <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let forecast of products">
-            <td>{{ forecast.name }}</td>
-            <td>{{ forecast.productId }}</td>
-            <td>{{ forecast.description }}</td>
-        </tr>
-    </tbody>
-</table>
+<div *ngIf="products" class="row">
+    <div class="col-sm-6" *ngFor="let product of products">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{product.name}}</h5>
+          <p class="card-text">{{product.description}}</p>
+          <p class="card-text"><small>{{product.unitPrice}}</small></p>
+        </div>
+      </div>
+    </div>
+</div>
