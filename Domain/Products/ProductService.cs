@@ -22,8 +22,8 @@ namespace Domain.Products
             try
             {
                 var response = client.Get<List<Product>>(request);
-                return response?.Select(x => { x.UnitPrice *= 1.2; return x; } )?.ToList() ?? new List<Product>();
-            }
+                return response?.Select(x => { x.UnitPrice = Math.Round(x.UnitPrice * 1.2, 2); return x; } )?.ToList() ?? new List<Product>();
+            } 
             catch (Exception ex)
             {
                 throw new Exception("Service not available");
